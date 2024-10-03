@@ -9,6 +9,17 @@
     <!-- Daisy UI & Tailwind CDN -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.11/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#FF1F3D",
+              }
+            }
+          }
+        }
+      </script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -31,16 +42,23 @@
                 </label>
             </div>
             <div class="sort">
-                <button class="btn">SORT</button>
+                <button class="btn bg-primary text-white">SORT</button>
             </div>
         </nav>
         <hr class="w-11/12 mx-auto mt-5">
     </header>
 
     <!-- Container : Main -->
-    <main></main>
+    <main>
+        <div id="category" class="flex justify-center gap-5 mt-5"></div>
+
+        <!-- Section : Video -->
+        <div id="videos" class="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 py-10"></div>
+    </main>
 
 
+    <script src="js/fetch.js"></script>
+    <script src="js/video.js"></script>
 </body>
 
 </html>
