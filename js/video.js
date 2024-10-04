@@ -1,3 +1,34 @@
+function getTimeString(time) {
+    //get Hour and rest seconds
+    const hour = parseInt(time / 3600);
+    if(hour >= 24)
+    {
+        const day = parseInt(hour / 24);
+        if(day >= 365)
+        {
+            const year = parseInt(day / 365);
+            const remainingDay = (day % 365);
+            const extraDay = parseInt(remainingDay);
+            return `${year} years ${extraDay} days ago`;
+        }     
+        else
+        {
+            const remainingHour = (hour % 24);
+            const extraHour = parseInt(remainingHour);
+            return `${day} days ${extraHour} hours ago`;
+        }       
+        
+    }
+    else
+    {
+        let remainingSecond = time % 3600;
+        const minute = parseInt(remainingSecond / 60);
+        return `${hour} hours ${minute} min ago`;
+    }
+   
+  }
+
+
 const loadVideos = () => {
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
     .then((response) => response.json())
@@ -37,9 +68,11 @@ const displayVideos = (videos) => {
 // };
 
     card.innerHTML = `
-    <figure class="h-56 rounded-lg">
+    <figure class="h-56 rounded-lg relative">
         <img class="h-full w-full object-cover" src="${video.thumbnail}" 
         />
+        ${video.others.posted_date?.length == 0 ? "" : `<span class="absolute right-3 bottom-2 bg-gray-800 text-xs rounded text-white px-2 py-1">${getTimeString(video.others.posted_date)}</span>`}
+        
     </figure>
 
     <div class="px-0 py-3 flex gap-4">
