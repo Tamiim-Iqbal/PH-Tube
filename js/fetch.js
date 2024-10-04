@@ -15,11 +15,13 @@ const displayCategories = (categories) => {
         // console.log(item);
 
     // create button
-        const button = document.createElement("button");
-        button.classList = "btn";
-        button.innerText = item.category;
-
-        categoryContainer.append(button);
+    const buttonContainer = document.createElement("div");
+    buttonContainer.innerHTML = `
+      <button id="btn-${item.category_id}" onclick="loadCategoryVideos(${item.category_id})" class="btn category-btn">${item.category}</button>
+    `;
+    
+    //add button to category container
+    categoryContainer.append(buttonContainer);
     });
 }
 loadCategories();

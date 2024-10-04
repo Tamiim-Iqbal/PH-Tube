@@ -29,19 +29,68 @@ function getTimeString(time) {
   }
 
 
-const loadVideos = () => {
-  fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
-    .then((response) => response.json())
-    .then((data) => displayVideos(data.videos))
-    .catch((error) => console.error(error));
-};
+
+  const removeActiveClass = () => {
+    const buttons = document.getElementsByClassName("category-btn");
+    // console.log(buttons);
+    for (let btn of buttons) {
+      btn.classList.remove("active");
+    }
+  };
+
+
+
+
+  const loadVideos = () => {
+    fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
+      .then((response) => response.json())
+      .then((data) => displayVideos(data.videos))
+      .catch((error) => console.error(error));
+  };
+
+
+
+
+
+
+  const loadCategoryVideos = (id) => {
+    // alert(id);
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        //active class remove
+        removeActiveClass();
+  
+        //id er class k active korao
+        const activeBtn = document.getElementById(`btn-${id}`);
+        activeBtn.classList.add("active");
+        displayVideos(data.category);
+      })
+      .catch((error) => console.log(error));
+  };
+
+
+
+
 
 const displayVideos = (videos) => {
   const videoContainer = document.getElementById("videos");
+  videoContainer.innerHTML = "";
+
+  if (videos.length == 0) {
+    videoContainer.classList.remove("grid");
+    videoContainer.innerHTML = `
+    <div class="min-h-[400px] flex flex-col gap-5 justify-center items-center">
+      <img src="resources/Icon.png" /> 
+      <h2 class="text-center text-xl font-bold"> No Content Here in this Categery </h2> 
+    </div>`;
+  } else {
+    videoContainer.classList.add("grid");
+  }
 
   // console.log(categories);
     videos.forEach((video) => {
-    console.log(video);
+    // console.log(video);
 
     // create card
     const card = document.createElement("div");
