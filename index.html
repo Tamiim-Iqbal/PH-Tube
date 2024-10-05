@@ -56,6 +56,25 @@
         <div id="videos" class="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10 py-10"></div>
     </main>
 
+    <!-- Open the modal using ID.showModal() method -->
+    <button id="showModalData" class="btn hidden" onclick="customModal.showModal()">
+        open modal
+      </button>
+      <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+          <div id="modal-content">
+  
+          </div>
+          <div class="modal-action">
+            <form method="dialog">
+              <!-- if there is a button in form, it will close the modal -->
+              <button class="btn">Close</button>
+            </form>
+          </div>
+        </div>
+      </dialog>
+  
+
 
     <script src="js/fetch.js"></script>
     <script src="js/video.js"></script>

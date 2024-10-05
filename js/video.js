@@ -51,6 +51,31 @@ function getTimeString(time) {
 
 
 
+  const loadDetails = async (videoId) => {
+    console.log(videoId);
+    const uri = `https://openapi.programming-hero.com/api/phero-tube/video/${videoId}`;
+    const res = await fetch(uri);
+    const data = await res.json();
+    displayDetails(data.video);
+  };
+
+  const displayDetails = (video) => {
+    console.log(video);
+    const detailContainer = document.getElementById("modal-content");
+    
+    detailContainer.innerHTML = `
+     <img src=${video.thumbnail} />
+     <p>${video.description}</p>
+    `;
+
+    // way 1
+    // document.getElementById("showModalData").click();
+    
+    // way 2
+    document.getElementById("customModal").showModal();
+
+  }
+
 
 
   const loadCategoryVideos = (id) => {
